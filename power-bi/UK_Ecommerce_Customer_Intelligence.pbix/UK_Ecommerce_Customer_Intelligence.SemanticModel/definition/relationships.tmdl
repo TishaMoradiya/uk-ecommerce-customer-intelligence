@@ -1,0 +1,29 @@
+relationship 38dc8652-356f-431b-b713-25c6be40138b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_sales_transactions.InvoiceDate
+	toColumn: LocalDateTable_997b30de-6f57-46ee-9d15-74619f9e46c4.Date
+
+relationship 23c659dd-7b47-456d-b4e0-498bfab25ef3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_sales_transactions.OrderDate
+	toColumn: LocalDateTable_e0dd305c-f9c9-47d4-8f20-89eabb89fcb6.Date
+
+relationship 53e9a291-d1ce-4f97-864e-d796962ed5f2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_sales_transactions.YearMonth
+	toColumn: LocalDateTable_2f48bb06-247b-4fd2-9b8e-2f1378eb5b25.Date
+
+relationship AutoDetected_3c92b678-59cd-438b-a8fb-facfdb194f64
+	fromColumn: vw_sales_transactions.Country
+	toColumn: vw_geographic_performance.Country
+
+relationship 9794787d-e505-4f3c-9208-7c625d0062bd
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_customer_rfm.FirstPurchase
+	toColumn: LocalDateTable_1a18df95-b611-4463-a4f0-7f4efebea691.Date
+
+relationship eefd3964-539f-4d1d-84b1-930760da7ac1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_customer_rfm.LastPurchase
+	toColumn: LocalDateTable_00769ae5-d63d-4015-9ed8-4f804ac3151d.Date
+

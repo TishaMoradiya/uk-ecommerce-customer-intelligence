@@ -1,0 +1,171 @@
+table vw_customer_rfm
+	lineageTag: 628ec114-af1b-4534-bec5-b93053709170
+
+	measure 'Unique Customers KPI' =
+			
+			SUM('vw_geographic_performance'[UniqueCustomers])
+		formatString: 0
+		lineageTag: c2ac70fd-796f-4b21-8a57-a1a88ddb6c5c
+
+	measure 'Transaction Row Count' =
+			
+			COUNTROWS(vw_sales_transactions)
+		formatString: 0
+		lineageTag: 2c291fe1-205f-419f-98c7-d386102038bf
+
+	measure 'Average Order Value KPI' =
+			
+			DIVIDE(
+			    SUM('vw_geographic_performance'[TotalRevenue]),
+			    SUM('vw_geographic_performance'[TotalOrders]),
+			    0
+			)
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: aa728b6e-fbb6-46cc-bede-0ab7e62d169b
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	measure 'Portfolio Customer Count' = COUNTROWS('vw_customer_rfm')
+		formatString: #,0
+		lineageTag: 11111111-1111-4111-8111-111111111111
+
+	measure 'Portfolio Avg Customer Value' = AVERAGE('vw_customer_rfm'[Monetary])
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 22222222-2222-4222-8222-222222222222
+
+	measure 'Portfolio Avg Purchase Frequency' = AVERAGE('vw_customer_rfm'[Frequency])
+		formatString: 0.0
+		lineageTag: 33333333-3333-4333-8333-333333333333
+
+	measure 'Portfolio Avg Recency Days' = AVERAGE('vw_customer_rfm'[RecencyDays])
+		formatString: 0.0
+		lineageTag: 44444444-4444-4444-8444-444444444444
+
+	measure 'Portfolio Repeat Customer Pct' = DIVIDE(CALCULATE(COUNTROWS('vw_customer_rfm'), 'vw_customer_rfm'[CustomerType] = "Repeat Customer"), COUNTROWS('vw_customer_rfm'), 0)
+		formatString: 0.0%
+		lineageTag: 55555555-5555-4555-8555-555555555555
+
+	measure 'Portfolio Customer Monetary' = SUM('vw_customer_rfm'[Monetary])
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: 66666666-6666-4666-8666-666666666666
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: 75b45e82-3f0c-4543-a1fc-7e41c0a7928a
+		summarizeBy: count
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecencyDays
+		dataType: int64
+		formatString: 0
+		lineageTag: c0509167-1243-4796-9064-d08bfaefdec4
+		summarizeBy: sum
+		sourceColumn: RecencyDays
+
+		annotation SummarizationSetBy = Automatic
+
+	column Frequency
+		dataType: int64
+		formatString: 0
+		lineageTag: 44c39cbe-d085-4f1e-9f5f-25ea019a75f0
+		summarizeBy: sum
+		sourceColumn: Frequency
+
+		annotation SummarizationSetBy = Automatic
+
+	column Monetary
+		dataType: double
+		lineageTag: 39f51f0b-fd89-4654-8bf7-253b4c40c69f
+		summarizeBy: sum
+		sourceColumn: Monetary
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FirstPurchase
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 36ac345e-8081-45ad-95a7-9392025f2825
+		summarizeBy: none
+		sourceColumn: FirstPurchase
+
+		variation Variation
+			isDefault
+			relationship: 9794787d-e505-4f3c-9208-7c625d0062bd
+			defaultHierarchy: LocalDateTable_1a18df95-b611-4463-a4f0-7f4efebea691.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastPurchase
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 4f483323-b28d-43e1-b77d-9aa3fb758adf
+		summarizeBy: none
+		sourceColumn: LastPurchase
+
+		variation Variation
+			isDefault
+			relationship: eefd3964-539f-4d1d-84b1-930760da7ac1
+			defaultHierarchy: LocalDateTable_00769ae5-d63d-4015-9ed8-4f804ac3151d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column RecencyScore
+		dataType: int64
+		formatString: 0
+		lineageTag: 807a969a-c399-4cf3-82af-719279922253
+		summarizeBy: sum
+		sourceColumn: RecencyScore
+
+		annotation SummarizationSetBy = Automatic
+
+	column FrequencyScore
+		dataType: int64
+		formatString: 0
+		lineageTag: 61d04c69-cf04-4386-8dc8-400ad48a8c30
+		summarizeBy: sum
+		sourceColumn: FrequencyScore
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonetaryScore
+		dataType: int64
+		formatString: 0
+		lineageTag: 1c42e9dd-11c6-415f-b2c7-2506b8c3dfc1
+		summarizeBy: sum
+		sourceColumn: MonetaryScore
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerSegment
+		dataType: string
+		lineageTag: 95bdd77d-4d50-499d-bcf9-26dc8ee86129
+		summarizeBy: none
+		sourceColumn: CustomerSegment
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerType
+		dataType: string
+		lineageTag: 652e47f4-33e7-4a7f-ae43-3d5fd4753c6f
+		summarizeBy: none
+		sourceColumn: CustomerType
+
+		annotation SummarizationSetBy = Automatic
+
+	partition vw_customer_rfm = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\darsh\Downloads\uk-ecommerce-customer-intelligence 2\uk-ecommerce-customer-intelligence\data\power-bi\vw_customer_rfm.csv"),[Delimiter=",", Columns=11, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"CustomerID", Int64.Type}, {"RecencyDays", Int64.Type}, {"Frequency", Int64.Type}, {"Monetary", type number}, {"FirstPurchase", type datetime}, {"LastPurchase", type datetime}, {"RecencyScore", Int64.Type}, {"FrequencyScore", Int64.Type}, {"MonetaryScore", Int64.Type}, {"CustomerSegment", type text}, {"CustomerType", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

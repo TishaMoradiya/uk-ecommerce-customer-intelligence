@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "UK_Ecommerce_Customer_Intelligence"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5e230d44-1467-48b9-bc7c-d4a9cb4f431f"
+  }
+}

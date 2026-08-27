@@ -1,0 +1,252 @@
+cultureInfo en-GB
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "vw_sales_transactions.portfolio_average_order_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_sales_transactions",
+			          "ConceptualProperty": "Portfolio Average Order Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Average Order Value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_sales_transactions.portfolio_total_orders": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_sales_transactions",
+			          "ConceptualProperty": "Portfolio Total Orders"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total Orders": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_sales_transactions.portfolio_units_sold": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_sales_transactions",
+			          "ConceptualProperty": "Portfolio Units Sold"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Units Sold": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_sales_transactions.portfolio_total_revenue": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_sales_transactions",
+			          "ConceptualProperty": "Portfolio Total Revenue"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Total Revenue": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_sales_transactions.portfolio_unique_customers": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_sales_transactions",
+			          "ConceptualProperty": "Portfolio Unique Customers"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Unique Customers": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_customer_rfm.portfolio_avg_purchase_frequency": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_customer_rfm",
+			          "ConceptualProperty": "Portfolio Avg Purchase Frequency"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Avg Purchase Frequency": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_customer_rfm.portfolio_avg_recency_days": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_customer_rfm",
+			          "ConceptualProperty": "Portfolio Avg Recency Days"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Avg Recency (Days)": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_customer_rfm.portfolio_customer_count": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_customer_rfm",
+			          "ConceptualProperty": "Portfolio Customer Count"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Customer Count": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        },
+			        {
+			          "Total Customers": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_customer_rfm.portfolio_customer_monetary": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_customer_rfm",
+			          "ConceptualProperty": "Portfolio Customer Monetary"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Customer Monetary": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_customer_rfm.portfolio_repeat_customer_pct": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_customer_rfm",
+			          "ConceptualProperty": "Portfolio Repeat Customer Pct"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Repeat Customer %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "vw_customer_rfm.portfolio_avg_customer_value": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "vw_customer_rfm",
+			          "ConceptualProperty": "Portfolio Avg Customer Value"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Avg Customer Value": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

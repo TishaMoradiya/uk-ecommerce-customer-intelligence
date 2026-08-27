@@ -1,0 +1,82 @@
+table vw_geographic_performance
+	lineageTag: 3aec8eee-3448-426a-a301-ea915e03f793
+
+	measure 'Units Sold KPI' = SUM('vw_geographic_performance'[UnitsSold])
+		formatString: 0
+		lineageTag: fe09ae6a-73ca-4641-b0f8-30bae531e59a
+
+	column Country
+		dataType: string
+		lineageTag: f489bab8-659c-449b-beb5-959deca168cb
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Market
+		dataType: string
+		lineageTag: 71fdc8e2-dc84-46fa-9369-872fcb10a44d
+		summarizeBy: none
+		sourceColumn: Market
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalOrders
+		dataType: int64
+		formatString: 0
+		lineageTag: 8faa14f6-daf2-4d39-85de-1c084e5b1229
+		summarizeBy: none
+		sourceColumn: TotalOrders
+
+		annotation SummarizationSetBy = Automatic
+
+	column UniqueCustomers
+		dataType: int64
+		formatString: 0
+		lineageTag: 5842347c-7457-4ddb-8ea2-1adeb9ac233c
+		summarizeBy: none
+		sourceColumn: UniqueCustomers
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitsSold
+		dataType: int64
+		formatString: 0
+		lineageTag: a55c3df4-5d23-4091-827f-940ec2628693
+		summarizeBy: none
+		sourceColumn: UnitsSold
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalRevenue
+		dataType: double
+		lineageTag: c35973e9-7999-4f80-bdaa-6d27619cd8a8
+		summarizeBy: none
+		sourceColumn: TotalRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AverageOrderValue
+		dataType: double
+		lineageTag: 429bd24b-0ecb-4c6d-a967-d4df58127a16
+		summarizeBy: none
+		sourceColumn: AverageOrderValue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition vw_geographic_performance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\darsh\Downloads\uk-ecommerce-customer-intelligence 2\uk-ecommerce-customer-intelligence\data\power-bi\vw_geographic_performance.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Country", type text}, {"Market", type text}, {"TotalOrders", Int64.Type}, {"UniqueCustomers", Int64.Type}, {"UnitsSold", Int64.Type}, {"TotalRevenue", type number}, {"AverageOrderValue", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

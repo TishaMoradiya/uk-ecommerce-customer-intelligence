@@ -1,0 +1,180 @@
+table vw_sales_transactions
+	lineageTag: 1a62ef4f-b927-46fb-8974-220fe2dadd83
+
+	measure 'Portfolio Total Revenue' = SUM('vw_sales_transactions'[Revenue])
+		formatString: "£"#,0.00
+		lineageTag: a0d7600a-2fe3-4bcb-8a8a-613012faf001
+
+	measure 'Portfolio Unique Customers' = DISTINCTCOUNTNOBLANK('vw_sales_transactions'[CustomerID])
+		formatString: 0
+		lineageTag: a0d7600a-2fe3-4bcb-8a8a-613012faf002
+
+	measure 'Portfolio Total Orders' = DISTINCTCOUNT('vw_sales_transactions'[Invoice])
+		formatString: 0
+		lineageTag: a0d7600a-2fe3-4bcb-8a8a-613012faf003
+
+	measure 'Portfolio Average Order Value' = DIVIDE([Portfolio Total Revenue], [Portfolio Total Orders], 0)
+		formatString: "£"#,0.00
+		lineageTag: a0d7600a-2fe3-4bcb-8a8a-613012faf004
+
+	measure 'Portfolio Units Sold' = SUM('vw_sales_transactions'[Quantity])
+		formatString: 0
+		lineageTag: a0d7600a-2fe3-4bcb-8a8a-613012faf005
+
+	column Invoice
+		dataType: string
+		lineageTag: c23a18ad-c2f3-41d8-bb7c-5f5cc290fb95
+		summarizeBy: none
+		sourceColumn: Invoice
+
+		annotation SummarizationSetBy = Automatic
+
+	column StockCode
+		dataType: string
+		lineageTag: 32f67347-a057-4d39-be4b-911874258eb8
+		summarizeBy: none
+		sourceColumn: StockCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 4df7ebf5-cb35-497c-8551-c7d5b4da3543
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 542af3f4-213c-41bd-9cc0-84f176176d6e
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 3db68486-2d32-44b4-897e-5b7b9ba58e12
+		summarizeBy: none
+		sourceColumn: InvoiceDate
+
+		variation Variation
+			isDefault
+			relationship: 38dc8652-356f-431b-b713-25c6be40138b
+			defaultHierarchy: LocalDateTable_997b30de-6f57-46ee-9d15-74619f9e46c4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d9cce5fd-6e13-4549-a579-60af21bdcfb1
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		variation Variation
+			isDefault
+			relationship: 23c659dd-7b47-456d-b4e0-498bfab25ef3
+			defaultHierarchy: LocalDateTable_e0dd305c-f9c9-47d4-8f20-89eabb89fcb6.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OrderYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 72da7278-4721-4f9d-bdef-d897760b0bf8
+		summarizeBy: sum
+		sourceColumn: OrderYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderMonthNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: 98497ece-aaca-4791-b818-b83d2ba93ffe
+		summarizeBy: sum
+		sourceColumn: OrderMonthNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b4b5c556-0a20-48e2-945a-91d0097448d0
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		variation Variation
+			isDefault
+			relationship: 53e9a291-d1ce-4f97-864e-d796962ed5f2
+			defaultHierarchy: LocalDateTable_2f48bb06-247b-4fd2-9b8e-2f1378eb5b25.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Price
+		dataType: double
+		lineageTag: 2befc983-84cf-49f3-b747-0037b03c889c
+		summarizeBy: sum
+		sourceColumn: Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b35c746-d80e-46b4-950f-8893be374322
+		summarizeBy: count
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: df9c7f4d-7733-450e-b1bc-32f4372a3642
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: double
+		formatString: "£"#,0.00;-"£"#,0.00;"£"#,0.00
+		lineageTag: e5cbbad8-f86b-49e7-ba06-24d930c8ddb5
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-GB"}
+
+	column Market
+		dataType: string
+		lineageTag: c114a5de-aa48-488b-8070-95e320b622b5
+		summarizeBy: none
+		sourceColumn: Market
+
+		annotation SummarizationSetBy = Automatic
+
+	partition vw_sales_transactions = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\darsh\Downloads\uk-ecommerce-customer-intelligence 2\uk-ecommerce-customer-intelligence\data\power-bi\vw_sales_transactions.csv"),[Delimiter=",", Columns=14, Encoding=1252, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Invoice", type text}, {"StockCode", type text}, {"Description", type text}, {"Quantity", Int64.Type}, {"InvoiceDate", type datetime}, {"OrderDate", type date}, {"OrderYear", Int64.Type}, {"OrderMonthNumber", Int64.Type}, {"YearMonth", type date}, {"Price", type number}, {"CustomerID", Int64.Type}, {"Country", type text}, {"Revenue", type number}, {"Market", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

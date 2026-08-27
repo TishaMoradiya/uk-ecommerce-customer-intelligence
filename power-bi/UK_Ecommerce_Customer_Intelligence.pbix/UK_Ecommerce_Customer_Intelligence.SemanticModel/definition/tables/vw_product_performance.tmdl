@@ -1,0 +1,73 @@
+table vw_product_performance
+	lineageTag: 759d96f2-979e-49a5-9650-4f55230a3942
+
+	measure 'Total Orders KPI' = SUM('vw_geographic_performance'[TotalOrders])
+		formatString: 0
+		lineageTag: 114a9de6-4176-4831-9d8f-3b48694ee3d5
+
+	column StockCode
+		dataType: string
+		lineageTag: 48a38d20-ea07-4f35-bde0-47f1b4141739
+		summarizeBy: none
+		sourceColumn: StockCode
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 28eddce3-e550-486a-a696-a4bd7579b45a
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitsSold
+		dataType: int64
+		formatString: 0
+		lineageTag: 47aef0d0-66f2-4073-9874-1b57c1be696c
+		summarizeBy: sum
+		sourceColumn: UnitsSold
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrdersContainingProduct
+		dataType: int64
+		formatString: 0
+		lineageTag: f65f7442-3b1d-4fc5-b723-df22b1083792
+		summarizeBy: sum
+		sourceColumn: OrdersContainingProduct
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductRevenue
+		dataType: double
+		lineageTag: 29c557a5-2c5a-4dd1-bf0d-05214fcca3f6
+		summarizeBy: sum
+		sourceColumn: ProductRevenue
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AverageUnitPrice
+		dataType: double
+		lineageTag: cf838a4a-f7ba-4546-aa3e-9acc1057a971
+		summarizeBy: sum
+		sourceColumn: AverageUnitPrice
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition vw_product_performance = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\darsh\Downloads\uk-ecommerce-customer-intelligence 2\uk-ecommerce-customer-intelligence\data\power-bi\vw_product_performance.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"StockCode", type text}, {"Description", type text}, {"UnitsSold", Int64.Type}, {"OrdersContainingProduct", Int64.Type}, {"ProductRevenue", type number}, {"AverageUnitPrice", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

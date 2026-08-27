@@ -450,20 +450,6 @@ Raw Online Retail II Excel Dataset
 ```text
 uk-ecommerce-customer-intelligence/
 │
-├── data/
-│   ├── raw/
-│   │   └── online_retail_II.xlsx
-│   │
-│   ├── processed/
-│   │   ├── clean_sales.csv
-│   │   └── customer_sales.csv
-│   │
-│   └── power-bi/
-│       ├── vw_customer_rfm.csv
-│       ├── vw_geographic_performance.csv
-│       ├── vw_product_performance.csv
-│       └── vw_sales_transactions.csv
-│
 ├── python/
 │   ├── data_quality_check.py
 │   └── data_cleaning.py
@@ -480,9 +466,10 @@ uk-ecommerce-customer-intelligence/
 │   ├── customer-analysis.jpg
 │   └── product-market-performance.jpg
 │
+├── .gitignore
 └── README.md
 ```
-
+> **Note:** Raw and processed datasets are not included in this repository because of GitHub file-size limitations. The Python scripts used for data-quality assessment and cleaning, SQL analysis, Power BI project files, and dashboard screenshots are provided.
 ---
 
 ## Skills Demonstrated
